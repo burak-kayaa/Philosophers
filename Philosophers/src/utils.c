@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:15:11 by burkaya           #+#    #+#             */
-/*   Updated: 2024/01/03 13:15:48 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/01/03 13:32:57 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	ft_isdigit(char *str)
 	return (1);
 }
 
-long long	get_start_time(void)
+long long	get_time(void)
 {
 	struct timeval	tv;
 
@@ -70,7 +70,7 @@ void	init_struct(t_data *data, int i)
 {
 	data->id[i].p_id = i + 1;
 	data->id[i].data = data;
-	data->id[i].pres_time = get_start_time() - data->start_t;
+	data->id[i].pres_time = get_time() - data->start_t;
 	data->id[i].e_count = 0;
 	data->id[i].control = 0;
 }
@@ -83,7 +83,7 @@ int	null_struct(t_data *data)
 	data->sleep_t = 0;
 	data->eat_count_t = -1;
 	data->tf_die = 0;
-	data->start_t = get_start_time();
+	data->start_t = get_time();
 	data->printing = malloc(sizeof(pthread_mutex_t));
 	if (!data->printing)
 		return (free(data), 0);

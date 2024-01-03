@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:42:05 by burkaya           #+#    #+#             */
-/*   Updated: 2024/01/02 18:04:33 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/01/03 13:32:20 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ int	dead_check_philo(t_philo *philo)
 	pthread_mutex_lock(philo->data->printing);
 	if (philo->control == 0)
 	{
-		if (get_start_time() - philo->data->start_t - philo->pres_time >= \
+		if (get_time() - philo->data->start_t - philo->pres_time >= \
 		philo->data->dead_t)
 		{
 			if (printtable)
 			{
-				printf("%lld %d died\n", get_start_time() - \
+				printf("%lld %d died\n", get_time() - \
 					philo->data->start_t, philo->p_id);
 				printtable = 0;
 			}
@@ -50,10 +50,10 @@ void	print_situation(t_philo *philo, long long time_s, char *str)
 
 static int	ft_sleep(t_philo *philo)
 {
-	print_situation(philo, get_start_time() - philo->data->start_t, SLEEP);
+	print_situation(philo, get_time() - philo->data->start_t, SLEEP);
 	while (dead_check_philo(philo) && philo->control != 1)
 	{
-		if (get_start_time() - philo->data->start_t - \
+		if (get_time() - philo->data->start_t - \
 				philo->pres_time == philo->data->sleep_t && philo->control != 1)
 			return (1);
 		usleep(50);
@@ -65,15 +65,15 @@ static int	ft_eat(t_philo *philo)
 {
 	long long	time;
 
-	time = get_start_time() - philo->data->start_t;
-	print_situation(philo, get_start_time() - philo->data->start_t, EAT);
+	time = get_time() - philo->data->start_t;
+	print_situation(philo, get_time() - philo->data->start_t, EAT);
 	while (dead_check_philo(philo) && philo->control != 1 && \
 		philo->e_count != philo->data->eat_count_t)
 	{
-		if (philo->data->eat_t == get_start_time() - philo->data->start_t - time
+		if (philo->data->eat_t == get_time() - philo->data->start_t - time
 			&& philo->control != 1)
 		{
-			philo->pres_time = get_start_time() - philo->data->start_t;
+			philo->pres_time = get_time() - philo->data->start_t;
 			philo->e_count++;
 			return (1);
 		}
@@ -92,7 +92,7 @@ void	*routine(void *arg)
 		pthread_mutex_lock(philo->r_fork);
 		pthread_mutex_lock(philo->l_fork);
 		check_control(philo);
-		print_situation(philo, get_start_time() - philo->data->start_t, FORKS);
+		print_situation(philo, get_time() - philo->data->start_t, FORKS);
 		ft_eat(philo);
 		check_control(philo);
 		pthread_mutex_unlock(philo->r_fork);
@@ -103,7 +103,7 @@ void	*routine(void *arg)
 		check_control(philo);
 		if (philo->control == 1)
 			break ;
-		print_situation(philo, get_start_time() - philo->data->start_t, THINK);
+		print_situation(philo, get_time() - philo->data->start_t, THINK);
 		check_control(philo);
 		if (philo->control == 1)
 			break ;

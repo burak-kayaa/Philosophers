@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:10:52 by burkaya           #+#    #+#             */
-/*   Updated: 2024/01/03 13:18:01 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/01/03 13:32:36 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ void	*one_philo(void *arg)
 
 	philo = (t_philo *)arg;
 	pthread_mutex_lock(philo->r_fork);
-	print_situation(philo, get_start_time() - philo->data->start_t, FORKS);
-	time = get_start_time() - philo->data->start_t;
+	print_situation(philo, get_time() - philo->data->start_t, FORKS);
+	time = get_time() - philo->data->start_t;
 	while (dead_check_philo(philo))
 	{
-		if (philo->data->dead_t == get_start_time() - 
+		if (philo->data->dead_t == get_time() - 
 			philo->data->start_t - time)
 		{
-			printf("%lld %d died\n", get_start_time() - \
+			printf("%lld %d died\n", get_time() - \
 				philo->data->start_t, philo->p_id);
 			pthread_mutex_unlock(philo->r_fork);
 			return (0);

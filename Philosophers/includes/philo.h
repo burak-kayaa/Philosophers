@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:03:31 by burkaya           #+#    #+#             */
-/*   Updated: 2024/01/03 11:23:25 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/01/03 13:33:12 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_data
 }	t_data;
 
 int			null_struct(t_data *data);
-long long	get_start_time(void);
+long long	get_time(void);
 int			ft_isdigit(char *str);
 void		init_struct(t_data *data, int i);
 void		check_control(t_philo *philo);
