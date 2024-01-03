@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:15:11 by burkaya           #+#    #+#             */
-/*   Updated: 2024/01/02 18:04:04 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/01/03 13:15:48 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_isdigit(char *str)
 	{
 		if (!(str[i] >= 48 && str[i] <= 57))
 		{
-			printf("%s | Error ARG : %s", ARRWRONG, str);
+			printf("%s | Error ARG : %s\n", ARRWRONG, str);
 			return (0);
 		}
 		i++;

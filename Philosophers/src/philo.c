@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:10:52 by burkaya           #+#    #+#             */
-/*   Updated: 2024/01/03 11:28:16 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/01/03 13:18:01 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,14 @@ static int	argc_checker(t_data *data, char **argv, int argc)
 	while (argv[i])
 	{
 		if (!(ft_isdigit(argv[i])))
-			return (0);
+			return (free(data->tf_dies), free(data->printing), free(data), 0);
 		i++;
 	}
 	data->p_count = ft_atoi(argv[1]);
 	data->dead_t = ft_atoi(argv[2]);
 	data->eat_t = ft_atoi(argv[3]);
 	data->sleep_t = ft_atoi(argv[4]);
+
 	if (argc == 6)
 		data->eat_count_t = ft_atoi(argv[5]);
 	data->id = malloc(sizeof(t_philo) * data->p_count);
