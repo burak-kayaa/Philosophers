@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:10:52 by burkaya           #+#    #+#             */
-/*   Updated: 2024/01/03 13:32:36 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/01/04 12:42:59 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	*one_philo(void *arg)
 	time = get_time() - philo->data->start_t;
 	while (dead_check_philo(philo))
 	{
-		if (philo->data->dead_t == get_time() - 
-			philo->data->start_t - time)
+		if (philo->data->dead_t == get_time()
+			- philo->data->start_t - time)
 		{
 			printf("%lld %d died\n", get_time() - \
 				philo->data->start_t, philo->p_id);
@@ -61,7 +61,7 @@ static int	ft_thread(t_data *data)
 	i = -1;
 	while (++i < data->p_count)
 	{
-		data->err = pthread_create(&data->id[i].philo, NULL, 
+		data->err = pthread_create(&data->id[i].philo, NULL,
 				routine, &data->id[i]);
 		if (data->err)
 			return (i);
@@ -87,7 +87,6 @@ static int	argc_checker(t_data *data, char **argv, int argc)
 	data->dead_t = ft_atoi(argv[2]);
 	data->eat_t = ft_atoi(argv[3]);
 	data->sleep_t = ft_atoi(argv[4]);
-
 	if (argc == 6)
 		data->eat_count_t = ft_atoi(argv[5]);
 	data->id = malloc(sizeof(t_philo) * data->p_count);
@@ -95,7 +94,7 @@ static int	argc_checker(t_data *data, char **argv, int argc)
 		return (free(data->printing), free(data->tf_dies), free(data), 0);
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->p_count);
 	if (!data->forks)
-		return (free(data->printing), free(data->tf_dies), 
+		return (free(data->printing), free(data->tf_dies),
 			free(data->id), free(data), 0);
 	return (1);
 }
@@ -124,6 +123,6 @@ int	main(int argc, char **argv)
 	}
 	pthread_mutex_destroy(data->printing);
 	pthread_mutex_destroy(data->forks);
-	return (free(data->printing), free(data->tf_dies), free(data->id), 
+	return (free(data->printing), free(data->tf_dies), free(data->id),
 		free(data->forks), free(data), 1);
 }

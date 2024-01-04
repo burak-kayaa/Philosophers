@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:15:11 by burkaya           #+#    #+#             */
-/*   Updated: 2024/01/03 13:32:57 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/01/04 12:42:40 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ long long	get_time(void)
 	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
-	return ((((long long)tv.tv_sec) * 1000) + (tv.tv_usec / 1000)); 
+	return ((((long long)tv.tv_sec) * 1000) + (tv.tv_usec / 1000));
 }
 
 void	init_struct(t_data *data, int i)
