@@ -2,7 +2,7 @@ SRCS	= ./src/philo.c ./src/utils.c ./src/routine.c
 OBJS	= $(SRCS:.c=.o)
 NAME	= philo
 CC		= gcc
-CFLAGS	= -Wall -Werror -Wextra
+CFLAGS	= -Wall -Werror -Wextra -g
 
 all: $(NAME)
 	clear

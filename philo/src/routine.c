@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:42:05 by burkaya           #+#    #+#             */
-/*   Updated: 2024/01/03 13:32:20 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/02/10 09:59:58 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	ft_sleep(t_philo *philo)
 		if (get_time() - philo->data->start_t - \
 				philo->pres_time == philo->data->sleep_t && philo->control != 1)
 			return (1);
-		usleep(50);
+		usleep(100);
 	}
 	return (0);
 }
@@ -70,7 +70,7 @@ static int	ft_eat(t_philo *philo)
 	while (dead_check_philo(philo) && philo->control != 1 && \
 		philo->e_count != philo->data->eat_count_t)
 	{
-		if (philo->data->eat_t == get_time() - philo->data->start_t - time
+		if (philo->data->eat_t == (get_time() - philo->data->start_t - time)
 			&& philo->control != 1)
 		{
 			philo->pres_time = get_time() - philo->data->start_t;

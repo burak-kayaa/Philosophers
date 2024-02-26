@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:15:11 by burkaya           #+#    #+#             */
-/*   Updated: 2024/01/04 12:42:40 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/02/11 14:04:20 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,5 @@ int	null_struct(t_data *data)
 	data->tf_dies = malloc(sizeof(pthread_mutex_t));
 	if (!data->tf_dies)
 		return (free(data->printing), free(data), 0);
-	pthread_mutex_init(data->printing, NULL);
-	pthread_mutex_init(data->tf_dies, NULL);
 	return (1);
 }

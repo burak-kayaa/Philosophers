@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:10:52 by burkaya           #+#    #+#             */
-/*   Updated: 2024/01/04 12:42:59 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/02/11 14:06:02 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,29 +22,17 @@ void	check_control(t_philo *philo)
 void	*one_philo(void *arg)
 {
 	t_philo		*philo;
-	long long	time;
 
 	philo = (t_philo *)arg;
 	pthread_mutex_lock(philo->r_fork);
 	print_situation(philo, get_time() - philo->data->start_t, FORKS);
-	time = get_time() - philo->data->start_t;
-	while (dead_check_philo(philo))
-	{
-		if (philo->data->dead_t == get_time()
-			- philo->data->start_t - time)
-		{
-			printf("%lld %d died\n", get_time() - \
-				philo->data->start_t, philo->p_id);
-			pthread_mutex_unlock(philo->r_fork);
-			return (0);
-		}
-		usleep(50);
-	}
+	usleep(philo->data->dead_t * 1000);
+	printf("%lld %d died\n", get_time() - philo->data->start_t, philo->p_id);
 	pthread_mutex_unlock(philo->r_fork);
 	return (0);
 }
 
-static int	ft_thread(t_data *data)
+static void	ft_thread(t_data *data)
 {
 	long long	i;
 
@@ -64,12 +52,13 @@ static int	ft_thread(t_data *data)
 		data->err = pthread_create(&data->id[i].philo, NULL,
 				routine, &data->id[i]);
 		if (data->err)
-			return (i);
+			return ;
 	}
 	i = -1;
 	while (++i < data->p_count)
 		pthread_join(data->id[i].philo, NULL);
-	return (0);
+	while (--i > -1)
+		pthread_mutex_destroy(&data->forks[i]);
 }
 
 static int	argc_checker(t_data *data, char **argv, int argc)
@@ -96,7 +85,8 @@ static int	argc_checker(t_data *data, char **argv, int argc)
 	if (!data->forks)
 		return (free(data->printing), free(data->tf_dies),
 			free(data->id), free(data), 0);
-	return (1);
+	return (pthread_mutex_init(data->printing, NULL),
+		pthread_mutex_init(data->tf_dies, NULL), 1);
 }
 
 int	main(int argc, char **argv)
@@ -120,6 +110,7 @@ int	main(int argc, char **argv)
 		if (data->err)
 			return (0);
 		pthread_join(data->id[0].philo, NULL);
+		pthread_mutex_destroy(&data->forks[0]);
 	}
 	pthread_mutex_destroy(data->printing);
 	pthread_mutex_destroy(data->forks);
